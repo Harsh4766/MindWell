@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MindWell</string>
+    <string name="Prev_rec"><u>Previous Records</u></string>
+    <string name="quiz"><u>Start Your Quiz</u></string>
+</resources>
