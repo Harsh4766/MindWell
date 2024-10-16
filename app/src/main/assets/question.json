@@ -1,0 +1,583 @@
+[
+  {
+    "id": 1,
+    "question": "When was the last time you were really happy?",
+    "totalOptions": 5,
+    "option1": {
+      "text": "Few days ago",
+      "score": 5
+    },
+    "option2": {
+      "text": "Few weeks ago",
+      "score": 4
+    },
+    "option3": {
+      "text": "Few months ago",
+      "score": 3
+    },
+    "option4": {
+      "text": "Few years ago",
+      "score": 2
+    },
+    "option5": {
+      "text": "I don't remember",
+      "score": 1
+    }
+  },
+  {
+    "id": 2,
+    "question": "Do you often experience sudden, intense feelings of anxiety or panic?",
+    "totalOptions": 5,
+    "option1": {
+      "text": "Never",
+      "score": 5
+    },
+    "option2": {
+      "text": "Rarely",
+      "score": 4
+    },
+    "option3": {
+      "text": "Sometimes",
+      "score": 3
+    },
+    "option4": {
+      "text": "Often",
+      "score": 2
+    },
+    "option5": {
+      "text": "Always",
+      "score": 1
+    }
+  },
+  {
+    "id": 3,
+    "question": "How often have you felt persistently sad or down in the past two weeks?",
+    "totalOptions": 5,
+    "option1": {
+      "text": "Often",
+      "score": 2
+    },
+    "option2": {
+      "text": "Rarely",
+      "score": 4
+    },
+    "option3": {
+      "text": "Never",
+      "score": 5
+    },
+    "option4": {
+      "text": "Sometimes",
+      "score": 3
+    },
+    "option5": {
+      "text": "Always",
+      "score": 1
+    }
+  },
+  {
+    "id": 4,
+    "question": "Have you noticed changes in your sleeping patterns recently?",
+    "totalOptions": 5,
+    "option1": {
+      "text": "Slightly",
+      "score": 4
+    },
+    "option2": {
+      "text": "Significantly",
+      "score": 2
+    },
+    "option3": {
+      "text": "Moderately",
+      "score": 3
+    },
+    "option4": {
+      "text": "Extremely",
+      "score": 1
+    },
+    "option5": {
+      "text": "Not at all",
+      "score": 5
+    }
+  },
+  {
+    "id": 5,
+    "question": "How many hours do you sleep per day?",
+    "totalOptions": 4,
+    "option1": {
+      "text": "Less than 4 hours",
+      "score": 1
+    },
+    "option2": {
+      "text": "7-9 hours",
+      "score": 5
+    },
+    "option3": {
+      "text": "4-6 hours",
+      "score": 3
+    },
+    "option4": {
+      "text": "9+ hours",
+      "score": 1
+    }
+  },
+  {
+    "id": 6,
+    "question": "How often do you find it hard to concentrate or make decisions?",
+    "totalOptions": 5,
+    "option1": {
+      "text": "Rarely",
+      "score": 4
+    },
+    "option2": {
+      "text": "Sometimes",
+      "score": 3
+    },
+    "option3": {
+      "text": "Never",
+      "score": 5
+    },
+    "option4": {
+      "text": "Often",
+      "score": 2
+    },
+    "option5": {
+      "text": "Always",
+      "score": 1
+    }
+  },
+  {
+    "id": 7,
+    "question": "Have you experienced a loss of interest or pleasure in activities you once enjoyed?",
+    "totalOptions": 5,
+    "option1": {
+      "text": "Sometimes",
+      "score": 3
+    },
+    "option2": {
+      "text": "Often",
+      "score": 2
+    },
+    "option3": {
+      "text": "Always",
+      "score": 1
+    },
+    "option4": {
+      "text": "Never",
+      "score": 5
+    },
+    "option5": {
+      "text": "Rarely",
+      "score": 4
+    }
+  },
+  {
+    "id": 8,
+    "question": "How would you rate your overall mental well-being at this moment?",
+    "totalOptions": 4,
+    "option1": {
+      "text": "Poor",
+      "score": 2
+    },
+    "option2": {
+      "text": "Excellent",
+      "score": 5
+    },
+    "option3": {
+      "text": "Fair",
+      "score": 3
+    },
+    "option4": {
+      "text": "Good",
+      "score": 4
+    }
+  },
+  {
+    "id": 9,
+    "question": "How comfortable do you feel discussing your mental health with others?",
+    "totalOptions": 5,
+    "option1": {
+      "text": "Very comfortable",
+      "score": 5
+    },
+    "option2": {
+      "text": "Comfortable",
+      "score": 4
+    },
+    "option3": {
+      "text": "Neutral",
+      "score": 3
+    },
+    "option4": {
+      "text": "Uncomfortable",
+      "score": 2
+    },
+    "option5": {
+      "text": "Very uncomfortable",
+      "score": 1
+    }
+  },
+  {
+    "id": 10,
+    "question": "How satisfied are you with your overall quality of life?",
+    "totalOptions": 5,
+    "option1": {
+      "text": "Very satisfied",
+      "score": 5
+    },
+    "option2": {
+      "text": "Neutral",
+      "score": 3
+    },
+    "option3": {
+      "text": "Satisfied",
+      "score": 4
+    },
+    "option4": {
+      "text": "Dissatisfied",
+      "score": 2
+    },
+    "option5": {
+      "text": "Very dissatisfied",
+      "score": 1
+    }
+  },
+  {
+    "id": 11,
+    "question": "Do you feel depressed or sad about your work?",
+    "totalOptions": 4,
+    "option1": {
+      "text": "Often",
+      "score": 2
+    },
+    "option2": {
+      "text": "No",
+      "score": 5
+    },
+    "option3": {
+      "text": "Sometimes",
+      "score": 4
+    },
+    "option4": {
+      "text": "Yes",
+      "score": 1
+    }
+  },
+  {
+    "id": 12,
+    "question": "How often do you feel positive about your life?",
+    "totalOptions": 5,
+    "option1": {
+      "text": "About half the time",
+      "score": 3
+    },
+    "option2": {
+      "text": "Once in a while",
+      "score": 2
+    },
+    "option3": {
+      "text": "Never",
+      "score": 1
+    },
+    "option4": {
+      "text": "Most of the time",
+      "score": 4
+    },
+    "option5": {
+      "text": "Always",
+      "score": 5
+    }
+  },
+  {
+    "id": 13,
+    "question": "When did you last get your mental health examination done?",
+    "totalOptions": 4,
+    "option1": {
+      "text": "A year ago",
+      "score": 3
+    },
+    "option2": {
+      "text": "A month ago",
+      "score": 2
+    },
+    "option3": {
+      "text": "A week ago",
+      "score": 1
+    },
+    "option4": {
+      "text": "Never",
+      "score": 5
+    }
+  },
+  {
+    "id": 14,
+    "question": "Have you experienced any significant loss in your financial situation recently?",
+    "totalOptions": 2,
+    "option1": {
+      "text": "Yes",
+      "score": 2
+    },
+    "option2": {
+      "text": "No",
+      "score": 5
+    }
+  },
+  {
+    "id": 15,
+    "question": "Are you satisfied with the balance between work, personal life, and self-care in your daily routine?",
+    "totalOptions": 5,
+    "option1": {
+      "text": "Very dissatisfied",
+      "score": 1
+    },
+    "option2": {
+      "text": "Satisfied",
+      "score": 4
+    },
+    "option3": {
+      "text": "Neutral",
+      "score": 3
+    },
+    "option4": {
+      "text": "Very satisfied",
+      "score": 5
+    },
+    "option5": {
+      "text": "Dissatisfied",
+      "score": 2
+    }
+  },
+  {
+    "id": 16,
+    "question": "How often do you feel tired during the day, even after a full night’s sleep?",
+    "totalOptions": 5,
+    "option1": {
+      "text": "Never",
+      "score": 5
+    },
+    "option2": {
+      "text": "Rarely",
+      "score": 4
+    },
+    "option3": {
+      "text": "Sometimes",
+      "score": 3
+    },
+    "option4": {
+      "text": "Often",
+      "score": 2
+    },
+    "option5": {
+      "text": "Always",
+      "score": 1
+    }
+  },
+  {
+    "id": 17,
+    "question": "Do you have a support system of friends or family to talk to when you feel stressed?",
+    "totalOptions": 4,
+    "option1": {
+      "text": "Yes, always",
+      "score": 5
+    },
+    "option2": {
+      "text": "Most of the time",
+      "score": 4
+    },
+    "option3": {
+      "text": "Sometimes",
+      "score": 3
+    },
+    "option4": {
+      "text": "No, never",
+      "score": 1
+    }
+  },
+  {
+    "id": 18,
+    "question": "How often do you find yourself avoiding social activities?",
+    "totalOptions": 5,
+    "option1": {
+      "text": "Never",
+      "score": 5
+    },
+    "option2": {
+      "text": "Rarely",
+      "score": 4
+    },
+    "option3": {
+      "text": "Sometimes",
+      "score": 3
+    },
+    "option4": {
+      "text": "Often",
+      "score": 2
+    },
+    "option5": {
+      "text": "Always",
+      "score": 1
+    }
+  },
+  {
+    "id": 19,
+    "question": "How would you describe your current relationship with your family?",
+    "totalOptions": 4,
+    "option1": {
+      "text": "Very close",
+      "score": 5
+    },
+    "option2": {
+      "text": "Close",
+      "score": 4
+    },
+    "option3": {
+      "text": "Neutral",
+      "score": 3
+    },
+    "option4": {
+      "text": "Distant",
+      "score": 2
+    }
+  },
+  {
+    "id": 20,
+    "question": "Do you engage in any activities or hobbies that bring you joy?",
+    "totalOptions": 5,
+    "option1": {
+      "text": "Always",
+      "score": 5
+    },
+    "option2": {
+      "text": "Most of the time",
+      "score": 4
+    },
+    "option3": {
+      "text": "Sometimes",
+      "score": 3
+    },
+    "option4": {
+      "text": "Rarely",
+      "score": 2
+    },
+    "option5": {
+      "text": "Never",
+      "score": 1
+    }
+  },
+  {
+    "id": 21,
+    "question": "Do you find it difficult to control your anger or frustration?",
+    "totalOptions": 5,
+    "option1": {
+      "text": "Never",
+      "score": 5
+    },
+    "option2": {
+      "text": "Rarely",
+      "score": 4
+    },
+    "option3": {
+      "text": "Sometimes",
+      "score": 3
+    },
+    "option4": {
+      "text": "Often",
+      "score": 2
+    },
+    "option5": {
+      "text": "Always",
+      "score": 1
+    }
+  },
+  {
+    "id": 22,
+    "question": "How often do you feel overwhelmed with your daily responsibilities?",
+    "totalOptions": 5,
+    "option1": {
+      "text": "Never",
+      "score": 5
+    },
+    "option2": {
+      "text": "Rarely",
+      "score": 4
+    },
+    "option3": {
+      "text": "Sometimes",
+      "score": 3
+    },
+    "option4": {
+      "text": "Often",
+      "score": 2
+    },
+    "option5": {
+      "text": "Always",
+      "score": 1
+    }
+  },
+  {
+    "id": 23,
+    "question": "How would you rate your stress level in the past month?",
+    "totalOptions": 4,
+    "option1": {
+      "text": "Very low",
+      "score": 5
+    },
+    "option2": {
+      "text": "Low",
+      "score": 4
+    },
+    "option3": {
+      "text": "Moderate",
+      "score": 3
+    },
+    "option4": {
+      "text": "High",
+      "score": 2
+    }
+  },
+  {
+    "id": 24,
+    "question": "Do you regularly take time for self-care or relaxation?",
+    "totalOptions": 5,
+    "option1": {
+      "text": "Always",
+      "score": 5
+    },
+    "option2": {
+      "text": "Most of the time",
+      "score": 4
+    },
+    "option3": {
+      "text": "Sometimes",
+      "score": 3
+    },
+    "option4": {
+      "text": "Rarely",
+      "score": 2
+    },
+    "option5": {
+      "text": "Never",
+      "score": 1
+    }
+  },
+  {
+    "id": 25,
+    "question": "How would you rate your energy levels throughout the day?",
+    "totalOptions": 4,
+    "option1": {
+      "text": "Very high",
+      "score": 5
+    },
+    "option2": {
+      "text": "High",
+      "score": 4
+    },
+    "option3": {
+      "text": "Moderate",
+      "score": 3
+    },
+    "option4": {
+      "text": "Low",
+      "score": 2
+    }
+  }
+]

@@ -1,0 +1,754 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rectangle_background"
+    tools:context=".advice">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="20dp"
+                android:visibility="gone"
+                android:id="@+id/advice_card1"
+                android:elevation="20dp"
+                app:cardElevation="20dp">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:text="Normal Stage"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="20dp"></TextView>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"></Space>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="20dp"
+                            android:elevation="20dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingStart="10dp"
+                                android:background="#959595"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="30dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_height="30dp"
+                                    android:src="@drawable/ic_baseline_check_circle_24"></ImageView>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:paddingStart="10dp"
+                                    android:text="Regular Exercise: Aim for at least 30 minutes of moderate exercise"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp">
+
+                                </TextView>
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"></Space>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="20dp"
+                            android:elevation="20dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#959595"
+                                android:paddingStart="10dp"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_marginTop="10dp"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:src="@drawable/ic_baseline_check_circle_24"></ImageView>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:paddingStart="10dp"
+                                    android:text="Balanced Diet : Eating a balanced diet with plenty of fruits, vegetables, whole grains, lean proteins, "
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp">
+
+                                </TextView>
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"></Space>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="20dp"
+                            android:elevation="20dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingStart="10dp"
+                                android:background="#959595"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/ic_baseline_check_circle_24"></ImageView>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:paddingStart="10dp"
+                                    android:text="Adequate Sleep: Aim for 7-9 hours of quality sleep per night"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp">
+
+                                </TextView>
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"></Space>
+
+
+
+                    </LinearLayout>
+                </ScrollView>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:visibility="gone"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/advice_card2"
+                android:elevation="20dp"
+                app:cardElevation="20dp">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Intermediate Stage"
+                            android:layout_marginTop="20dp"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="20dp"></TextView>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"></Space>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="20dp"
+                            android:elevation="20dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingStart="10dp"
+                                android:background="#959595"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/ic_baseline_check_circle_24"></ImageView>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:paddingStart="10dp"
+                                    android:text="Therapy or Counseling: Consider regular sessions with a therapist or counselor."
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp">
+
+                                </TextView>
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"></Space>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="20dp"
+                            android:elevation="20dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#959595"
+                                android:paddingStart="10dp"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/ic_baseline_check_circle_24"></ImageView>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:paddingStart="10dp"
+                                    android:text="Self-care: Doing yoga or meditation , adequate sleep , balanced diet"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp">
+
+                                </TextView>
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"></Space>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginHorizontal="20dp"
+                            android:elevation="20dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#959595"
+                                android:paddingStart="10dp"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/ic_baseline_check_circle_24"></ImageView>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:paddingStart="10dp"
+                                    android:text="Avoid self-medication"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp">
+
+                                </TextView>
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"></Space>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginHorizontal="20dp"
+                            android:elevation="20dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#959595"
+                                android:paddingStart="10dp"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/ic_baseline_check_circle_24"></ImageView>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:paddingStart="10dp"
+                                    android:text="Avoid drugs or alcohol"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp">
+
+                                </TextView>
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"></Space>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginHorizontal="20dp"
+                            android:elevation="20dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#959595"
+                                android:paddingStart="10dp"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/ic_baseline_check_circle_24"></ImageView>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:paddingStart="10dp"
+                                    android:text="Soical support : Maintain a strong support network around yourself"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp">
+
+                                </TextView>
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"></Space>
+
+
+
+                    </LinearLayout>
+                </ScrollView>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/advice_card3"
+                android:elevation="20dp"
+                app:cardElevation="20dp">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Critical Stage"
+                            android:layout_marginTop="20dp"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="20dp"></TextView>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"></Space>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="20dp"
+                            android:elevation="20dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#959595"
+                                android:paddingStart="10dp"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/ic_baseline_check_circle_24"></ImageView>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:paddingStart="10dp"
+                                    android:text="Immediate professional help"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp">
+
+                                </TextView>
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"></Space>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="20dp"
+                            android:elevation="20dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingStart="10dp"
+                                android:background="#959595"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/ic_baseline_check_circle_24"></ImageView>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:paddingStart="10dp"
+                                    android:text="Hospitalization if Necessary"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp">
+
+                                </TextView>
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"></Space>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginHorizontal="20dp"
+                            android:elevation="20dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#959595"
+                                android:paddingStart="10dp"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/ic_baseline_check_circle_24"></ImageView>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:paddingStart="10dp"
+                                    android:text="Avoid Alcohol and Substance Use"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp">
+
+                                </TextView>
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"></Space>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginHorizontal="20dp"
+                            android:elevation="20dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#959595"
+                                android:paddingStart="10dp"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/ic_baseline_check_circle_24"></ImageView>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:paddingStart="10dp"
+                                    android:text="Maintain 24/7 Support Network"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp">
+
+                                </TextView>
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"></Space>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="20dp"
+                            android:elevation="20dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#959595"
+                                android:paddingStart="10dp"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/ic_baseline_check_circle_24"></ImageView>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:paddingStart="10dp"
+                                    android:text="Safety Plan: Work with a mental health professional to create a safety plan"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp">
+
+                                </TextView>
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"></Space>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="20dp"
+                            android:elevation="20dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#959595"
+                                android:paddingStart="10dp"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/ic_baseline_check_circle_24"></ImageView>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:paddingStart="10dp"
+                                    android:text="Regular Check-ins with Professionals: Stay in regular contact with mental health professionals"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp">
+
+                                </TextView>
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"></Space>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="20dp"
+                            android:elevation="20dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#959595"
+                                android:paddingStart="10dp"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/ic_baseline_check_circle_24"></ImageView>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:paddingStart="10dp"
+                                    android:text="Self-Care and Basic Needs: Focus on meeting your basic needs for sleep, nutrition, hydration, and hygiene."
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp">
+
+                                </TextView>
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+                </ScrollView>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/home_nearby"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:cardCornerRadius="10dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginHorizontal="60dp"
+                app:cardBackgroundColor="#92a7e7">
+
+                <TextView
+                    android:id="@+id/home_hospitals"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="NearBy Hospitals"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold"></TextView>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
