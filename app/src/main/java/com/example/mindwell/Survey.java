@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -32,21 +34,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
-import java.util.HashMap;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-import android.os.AsyncTask;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Locale;
 
 public class Survey extends AppCompatActivity {
 
-    TextView question,questionNumberText;
+    TextView question, questionNumberText;
     RadioGroup options;
     Button submit;
     boolean isLastQuestion = false;
@@ -54,9 +53,10 @@ public class Survey extends AppCompatActivity {
     String question_text = "";
     String jsonFile;
     String currentSelectedOption;
-    int totalOptions,currentOptionIndex,questionNumber=0,currentScore,totalQuestion=30;
+    int totalOptions, currentOptionIndex, questionNumber = 0, currentScore, totalQuestion = 30;
     FirebaseAuth mAuth;
     DatabaseReference ref;
+    TextToSpeech textToSpeech;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -75,93 +75,74 @@ public class Survey extends AppCompatActivity {
         fetchQuestionsFromApi();
         getCurrentQuestion(questionNumber);
 
+        textToSpeech = new TextToSpeech(this, status -> {
+            if (status == TextToSpeech.SUCCESS) {
+                int result = textToSpeech.setLanguage(Locale.US);
+                if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                    Toast.makeText(Survey.this, "Language not supported for TTS", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         AlertDialog.Builder builder = new AlertDialog.Builder(Survey.this);
-        // Inflate the custom dialog layout
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.activity_progress, null);
-
-        // Set the custom layout for the dialog
         builder.setView(dialogView);
 
         final AlertDialog customDialog = builder.create();
 
-        options.setOnCheckedChangeListener((group, checkedId) -> {
-            RadioButton radioButton = findViewById(checkedId);
-            radioButton.setTextColor(Color.WHITE);
-            radioButton.setBackgroundResource(R.drawable.option_button);
-
-            currentSelectedOption = radioButton.getText().toString();
-            currentOptionIndex = checkedId;
-        });
-
-        final RadioButton[] previousCheckedRadioButton = {null}; // Initialize as null initially
+        final RadioButton[] previousCheckedRadioButton = {null};
 
         options.setOnCheckedChangeListener((group, checkedId) -> {
             RadioButton newCheckedRadioButton = findViewById(checkedId);
 
-            if (previousCheckedRadioButton[0] != null) {
-                // A previously checked RadioButton exists
-                if (previousCheckedRadioButton[0] != newCheckedRadioButton) {
-                    // The new RadioButton is different from the previously checked one,
-                    // so the previous one is being unchecked.
-                    previousCheckedRadioButton[0].setTextColor(Color.BLACK);
-                    previousCheckedRadioButton[0].setBackgroundResource(R.drawable.stroke_background);
-                }
+            if (previousCheckedRadioButton[0] != null && previousCheckedRadioButton[0] != newCheckedRadioButton) {
+                previousCheckedRadioButton[0].setTextColor(Color.BLACK);
+                previousCheckedRadioButton[0].setBackgroundResource(R.drawable.stroke_background);
             }
 
-            // Update the reference to the newly checked RadioButton
             previousCheckedRadioButton[0] = newCheckedRadioButton;
-
-            // Perform actions for the newly checked RadioButton
             newCheckedRadioButton.setTextColor(Color.WHITE);
             newCheckedRadioButton.setBackgroundResource(R.drawable.option_button);
 
             currentSelectedOption = newCheckedRadioButton.getText().toString();
             currentOptionIndex = checkedId;
-        });
 
+            // Speak the selected answer
+            speakText(currentSelectedOption);
+        });
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.animate().scaleX(0.95f).scaleY(0.95f).setDuration(100).withEndAction(() -> v.animate().scaleX(1f).scaleY(1f).setDuration(100));
 
-                v.animate().scaleX(0.95f).scaleY(0.95f).setDuration(100).withEndAction(() -> {
-                    v.animate().scaleX(1f).scaleY(1f).setDuration(100);
-                });
-
-                if(isLastQuestion == true)
-                {
+                if (isLastQuestion) {
                     customDialog.show();
                     LocalDate currentDate = null;
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         currentDate = LocalDate.now();
                     }
                     HashMap<String, Object> data = new HashMap<>();
-                    data.put("Score",""+currentScore);
-                    data.put("Date","" +currentDate);
+                    data.put("Score", "" + currentScore);
+                    data.put("Date", "" + currentDate);
                     ref.child("User").child(mAuth.getCurrentUser().getUid()).updateChildren(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful())
-                            {
+                            if (task.isSuccessful()) {
                                 ref.child("Data").child(mAuth.getCurrentUser().getUid()).push().setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                        if(task.isSuccessful())
-                                        {
+                                        if (task.isSuccessful()) {
                                             customDialog.dismiss();
                                             HomeActivity();
-                                        }
-                                        else
-                                        {
+                                        } else {
                                             customDialog.dismiss();
                                             Toast.makeText(Survey.this, "Error", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
-                            }
-                            else
-                            {
+                            } else {
                                 customDialog.dismiss();
                                 Toast.makeText(Survey.this, "Error", Toast.LENGTH_SHORT).show();
                             }
@@ -169,16 +150,13 @@ public class Survey extends AppCompatActivity {
                     });
                     return;
                 }
-                if(TextUtils.isEmpty(currentSelectedOption))
-                {
+
+                if (TextUtils.isEmpty(currentSelectedOption)) {
                     Toast.makeText(Survey.this, "please Select Option", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    currentScore += getCurrentScore(questionNumber,currentOptionIndex);
+                } else {
+                    currentScore += getCurrentScore(questionNumber, currentOptionIndex);
                     questionNumber++;
-                    if(questionNumber==totalQuestion)
-                    {
+                    if (questionNumber == totalQuestion) {
                         submit.setText("Submit");
                     }
                     getCurrentQuestion(questionNumber);
@@ -187,38 +165,38 @@ public class Survey extends AppCompatActivity {
         });
     }
 
-    int getCurrentScore(int questionIndex,int optionIndex) {
-        int score=0;
+    private void speakText(String text) {
+        if (textToSpeech != null) {
+            textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
+        }
+    }
+
+    int getCurrentScore(int questionIndex, int optionIndex) {
+        int score = 0;
         try {
             JSONArray jsonArray = new JSONArray(jsonFile);
             JSONObject questionObject = jsonArray.getJSONObject(questionIndex);
-            JSONObject optionObject = questionObject.getJSONObject("option"+optionIndex);
+            JSONObject optionObject = questionObject.getJSONObject("option" + optionIndex);
             score = optionObject.getInt("score");
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return score;
     }
 
-    void  getCurrentQuestion(int index)
-    {
-        if(questionNumber >= totalQuestion)
-        {
+    void getCurrentQuestion(int index) {
+        if (questionNumber >= totalQuestion) {
             questionNumberText.setText("Q" + (index + 1));
             options.removeAllViews();
             question.setText("Do you like to share something..");
             lastQuestion.setVisibility(View.VISIBLE);
             isLastQuestion = true;
-        }
-        else {
+        } else {
             try {
-
                 Animation slideOut = AnimationUtils.loadAnimation(this, R.anim.slide_out);
                 question.startAnimation(slideOut);
                 options.startAnimation(slideOut);
                 questionNumberText.setText("Q" + (index + 1));
-                // If your JSON contains an array
                 currentSelectedOption = null;
                 options.removeAllViews();
                 JSONArray jsonArray = new JSONArray(jsonFile);
@@ -226,6 +204,8 @@ public class Survey extends AppCompatActivity {
                 JSONObject questionObject = jsonArray.getJSONObject(index);
                 question.setText(questionObject.getString("question"));
 
+                // Speak the current question
+                speakText(questionObject.getString("question"));
 
                 Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
                 question.startAnimation(fadeIn);
@@ -261,8 +241,6 @@ public class Survey extends AppCompatActivity {
                     radioButton.startAnimation(fadeIn);
                     options.addView(radioButton);
                 }
-
-                // Access individual options
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -270,7 +248,7 @@ public class Survey extends AppCompatActivity {
     }
 
     public void fetchQuestionsFromApi() {
-         new FetchQuestionsTask().execute();
+        new FetchQuestionsTask().execute();
     }
 
     private class FetchQuestionsTask extends AsyncTask<Void, Void, String> {
@@ -325,29 +303,6 @@ public class Survey extends AppCompatActivity {
             }
         }
     }
-
-//    private void ReadJsonFile()
-//    {
-//        try {
-//            // Initialize the AssetManager
-//            AssetManager assetManager = getApplicationContext().getAssets();
-//
-//            // Open the JSON file using InputStream
-//            InputStream inputStream = assetManager.open("question.json");
-//
-//            // Read the JSON data into a string
-//            int size = inputStream.available();
-//            byte[] buffer = new byte[size];
-//            inputStream.read(buffer);
-//            inputStream.close();
-//            jsonFile = new String(buffer, StandardCharsets.UTF_8);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-
 
     private void HomeActivity()
     {

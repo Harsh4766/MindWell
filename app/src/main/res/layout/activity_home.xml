@@ -227,6 +227,16 @@
                 </ScrollView>
 
                 <TextView
+                    android:id="@+id/share_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="20dp"
+                    android:text="Share"
+                    android:textAlignment="textStart"
+                    android:textColor="#0046a0"
+                    android:textSize="15dp"></TextView>
+
+                <TextView
                     android:id="@+id/home_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
