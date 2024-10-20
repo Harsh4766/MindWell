@@ -7,6 +7,9 @@ import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -64,7 +67,7 @@ import java.util.UUID;
 public class Home extends AppCompatActivity {
 
     CardView quiz,scoreCardView;
-    TextView con_quiz,previousButton,shareTextView;
+    TextView con_quiz,previousButton;
     FirebaseAuth mAuth;
     DatabaseReference db;
     String progress;
@@ -72,12 +75,12 @@ public class Home extends AppCompatActivity {
     ProgressBar homeProgressBar;
     TextView percentageValue,advice,homeName,homeHealth,viewmore;
     boolean userFirstTime = true;
-    ImageView profile;
+    ImageView profile,shareView;
     private FirebaseStorage storage;
     private StorageReference storageReference;
 
     private static final int CAMERA_REQUEST = 2;  // Unique request code for camera
-
+    private static final int GALLERY_REQUEST = 200;
     private Uri imageUri;
 
     @Override
@@ -98,7 +101,7 @@ public class Home extends AppCompatActivity {
         homeName = findViewById(R.id.home_name);
         homeHealth = findViewById(R.id.home_stage);
         profile=findViewById(R.id.home_logo);
-        shareTextView=findViewById(R.id.share_view);
+        shareView=findViewById(R.id.share_view);
 
         storage=FirebaseStorage.getInstance();
         storageReference=storage.getReference();
@@ -112,7 +115,7 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        shareTextView.setOnClickListener(new View.OnClickListener() {
+        shareView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 shareAdvice();
@@ -159,9 +162,24 @@ public class Home extends AppCompatActivity {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                takePicture();
+                AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+                builder.setTitle("Choose an option");
+                String[] options = {"Take Photo", "Choose from Gallery"};
+
+                builder.setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (which == 0) {
+                            takePicture();
+                        } else if (which == 1) {
+                            chooseFromGallery();
+                        }
+                    }
+                });
+                builder.show();
             }
         });
+
         CheckCurrentUser();
         FetchData();
     }
@@ -170,13 +188,11 @@ public class Home extends AppCompatActivity {
     private void shareAdvice() {
         String adviceText = advice.getText().toString();
 
-        // Create a share intent
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Mental Health Advice");
         shareIntent.putExtra(Intent.EXTRA_TEXT, adviceText);
 
-        // Start the share activity
         startActivity(Intent.createChooser(shareIntent, "Share via"));
     }
 
@@ -206,16 +222,20 @@ public class Home extends AppCompatActivity {
         }
     }
 
+    private void chooseFromGallery() {
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(galleryIntent, GALLERY_REQUEST);
+    }
+
     private File createImageFile() throws IOException {
-        // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
         return File.createTempFile(
-                imageFileName,  // Prefix
-                ".jpg",         // Suffix
-                storageDir      // Directory
+                imageFileName,
+                ".jpg",
+                storageDir
         );
     }
 
@@ -223,19 +243,23 @@ public class Home extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
-            profile.setImageURI(imageUri);  // Set the captured image to the ImageView
-            uploadPicture();  // Upload the captured image
+            profile.setImageURI(imageUri);
+            uploadPicture();
+
+        } else if (requestCode == GALLERY_REQUEST && resultCode == RESULT_OK && data != null) {
+            imageUri = data.getData();
+            profile.setImageURI(imageUri);
+            uploadPicture();
         }
     }
 
-    private void uploadPicture()
-    {
-        final ProgressDialog pd=new ProgressDialog(this);
+    private void uploadPicture() {
+        final ProgressDialog pd = new ProgressDialog(this);
         pd.setTitle("Uploading Image...");
         pd.show();
 
-        final String randomKey= UUID.randomUUID().toString();
-        StorageReference ref=storageReference.child("images/"+randomKey);
+        final String randomKey = UUID.randomUUID().toString();
+        StorageReference ref = storageReference.child("images/" + randomKey);
 
         ref.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -243,25 +267,21 @@ public class Home extends AppCompatActivity {
                 ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        HashMap<String,Object> data = new HashMap<>();
-                        data.put("imageUrl",uri.toString());
+                        HashMap<String, Object> data = new HashMap<>();
+                        data.put("imageUrl", uri.toString());
                         db.child(mAuth.getCurrentUser().getUid()).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful())
-                                {
+                                if (task.isSuccessful()) {
                                     pd.dismiss();
-                                    Toast.makeText(getApplicationContext(),"Image uploaded",Toast.LENGTH_LONG).show();
-                                }
-                                else
-                                {
+                                    Toast.makeText(getApplicationContext(), "Image uploaded", Toast.LENGTH_LONG).show();
+                                } else {
                                     pd.dismiss();
                                 }
                             }
                         });
                     }
                 });
-
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -272,11 +292,12 @@ public class Home extends AppCompatActivity {
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-                double progressPercent=(100.00 * taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-                pd.setMessage("Progress "+(int) progressPercent+"%");
+                double progressPercent = (100.00 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                pd.setMessage("Progress " + (int) progressPercent + "%");
             }
-  });
+        });
     }
+
 
     private void FetchData() {
         db.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
@@ -334,19 +355,14 @@ public class Home extends AppCompatActivity {
                             stage=1;
                             homeHealth.setText("Mental Health Stage: Normal");
                             if (progressDrawable instanceof LayerDrawable) {
-                                // Cast the progress drawable to a LayerDrawable
                                 LayerDrawable layerDrawable = (LayerDrawable) progressDrawable;
 
-                                // Find the item you want to change by its index (0 for the background, 1 for the progress)
                                 int progressItemIndex = 0;
                                 Drawable progressItem = layerDrawable.getDrawable(progressItemIndex);
 
-                                // Modify the color of the shape inside the progress item
                                 if (progressItem instanceof GradientDrawable) {
-                                    // Cast the Drawable to a GradientDrawable (assuming it's a shape)
                                     GradientDrawable shape = (GradientDrawable) progressItem;
 
-                                    // Set the new color
                                     shape.setStroke(3,Color.parseColor("#2fde2d")); // Change to your desired color
                                 }
                                 else
@@ -358,10 +374,8 @@ public class Home extends AppCompatActivity {
                                 Drawable progressItem_1 = layerDrawable.getDrawable(progressItemIndex_1);
                                 ScaleDrawable scaleDrawable = (ScaleDrawable) progressItem_1;
 
-                                // Get the inner drawable
                                 Drawable innerDrawable = scaleDrawable.getDrawable();
 
-                                // If the inner drawable is a GradientDrawable, change its color
                                 if (innerDrawable instanceof GradientDrawable) {
                                     GradientDrawable shape = (GradientDrawable) innerDrawable;
                                     shape.setColor(Color.parseColor("#2fde2d")); // Change to your desired color
@@ -383,19 +397,14 @@ public class Home extends AppCompatActivity {
                             stage=2;
                             homeHealth.setText("Mental Health Stage: Intermediate");
                             if (progressDrawable instanceof LayerDrawable) {
-                                // Cast the progress drawable to a LayerDrawable
                                 LayerDrawable layerDrawable = (LayerDrawable) progressDrawable;
 
-                                // Find the item you want to change by its index (0 for the background, 1 for the progress)
                                 int progressItemIndex = 0;
                                 Drawable progressItem = layerDrawable.getDrawable(progressItemIndex);
 
-                                // Modify the color of the shape inside the progress item
                                 if (progressItem instanceof GradientDrawable) {
-                                    // Cast the Drawable to a GradientDrawable (assuming it's a shape)
                                     GradientDrawable shape = (GradientDrawable) progressItem;
 
-                                    // Set the new color
                                     shape.setStroke(3,Color.parseColor("#2d88de")); // Change to your desired color
                                 }
                                 else
@@ -407,10 +416,8 @@ public class Home extends AppCompatActivity {
                                 Drawable progressItem_1 = layerDrawable.getDrawable(progressItemIndex_1);
                                 ScaleDrawable scaleDrawable = (ScaleDrawable) progressItem_1;
 
-                                // Get the inner drawable
                                 Drawable innerDrawable = scaleDrawable.getDrawable();
 
-                                // If the inner drawable is a GradientDrawable, change its color
                                 if (innerDrawable instanceof GradientDrawable) {
                                     GradientDrawable shape = (GradientDrawable) innerDrawable;
                                     shape.setColor(Color.parseColor("#2d88de")); // Change to your desired color
@@ -431,19 +438,14 @@ public class Home extends AppCompatActivity {
                             stage=3;
                             homeHealth.setText("Mental Health Stage: Critical");
                             if (progressDrawable instanceof LayerDrawable) {
-                                // Cast the progress drawable to a LayerDrawable
                                 LayerDrawable layerDrawable = (LayerDrawable) progressDrawable;
 
-                                // Find the item you want to change by its index (0 for the background, 1 for the progress)
                                 int progressItemIndex = 0;
                                 Drawable progressItem = layerDrawable.getDrawable(progressItemIndex);
 
-                                // Modify the color of the shape inside the progress item
                                 if (progressItem instanceof GradientDrawable) {
-                                    // Cast the Drawable to a GradientDrawable (assuming it's a shape)
                                     GradientDrawable shape = (GradientDrawable) progressItem;
 
-                                    // Set the new color
                                     shape.setStroke(3,Color.parseColor("#de2d2d")); // Change to your desired color
                                 }
                                 else
@@ -455,10 +457,8 @@ public class Home extends AppCompatActivity {
                                 Drawable progressItem_1 = layerDrawable.getDrawable(progressItemIndex_1);
                                 ScaleDrawable scaleDrawable = (ScaleDrawable) progressItem_1;
 
-                                // Get the inner drawable
                                 Drawable innerDrawable = scaleDrawable.getDrawable();
 
-                                // If the inner drawable is a GradientDrawable, change its color
                                 if (innerDrawable instanceof GradientDrawable) {
                                     GradientDrawable shape = (GradientDrawable) innerDrawable;
                                     shape.setColor(Color.parseColor("#de2d2d")); // Change to your desired color

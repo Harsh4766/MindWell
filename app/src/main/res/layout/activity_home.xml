@@ -226,25 +226,35 @@
 
                 </ScrollView>
 
-                <TextView
-                    android:id="@+id/share_view"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingStart="20dp"
-                    android:text="Share"
-                    android:textAlignment="textStart"
-                    android:textColor="#0046a0"
-                    android:textSize="15dp"></TextView>
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
-                <TextView
-                    android:id="@+id/home_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="View More"
-                    android:textAlignment="textEnd"
-                    android:paddingEnd="20dp"
-                    android:textColor="#0046a0"
-                    android:textSize="15dp"></TextView>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="20dp"
+                        android:id="@+id/share_view"
+                        android:src="@drawable/baseline_share_24"
+                        android:contentDescription="Share icon"
+                        android:gravity="start"/>
+
+                    <TextView
+                        android:id="@+id/home_view"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:paddingEnd="20dp"
+                        android:text="View More"
+                        android:gravity="end"
+                        android:textColor="#0046a0"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+
 
             </LinearLayout>
 
