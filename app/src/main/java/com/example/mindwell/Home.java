@@ -7,6 +7,17 @@ import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.ScaleDrawable;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -53,7 +64,7 @@ import java.util.UUID;
 public class Home extends AppCompatActivity {
 
     CardView quiz,scoreCardView;
-    TextView con_quiz,previousButton;
+    TextView con_quiz,previousButton,shareTextView;
     FirebaseAuth mAuth;
     DatabaseReference db;
     String progress;
@@ -87,6 +98,7 @@ public class Home extends AppCompatActivity {
         homeName = findViewById(R.id.home_name);
         homeHealth = findViewById(R.id.home_stage);
         profile=findViewById(R.id.home_logo);
+        shareTextView=findViewById(R.id.share_view);
 
         storage=FirebaseStorage.getInstance();
         storageReference=storage.getReference();
@@ -97,6 +109,13 @@ public class Home extends AppCompatActivity {
                 Intent i=new Intent(Home.this,Survey.class);
                 startActivity(i);
                 finish();
+            }
+        });
+
+        shareTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shareAdvice();
             }
         });
 
@@ -148,14 +167,26 @@ public class Home extends AppCompatActivity {
     }
 
 
+    private void shareAdvice() {
+        String adviceText = advice.getText().toString();
+
+        // Create a share intent
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Mental Health Advice");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, adviceText);
+
+        // Start the share activity
+        startActivity(Intent.createChooser(shareIntent, "Share via"));
+    }
+
+
     private void takePicture() {
         ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, 100);
-        // Create an intent to open the camera
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        // Ensure there's a camera activity to handle the intent
         if (cameraIntent.resolveActivity(getPackageManager()) != null) {
-            // Create a temporary file to save the image
+
             File photoFile = null;
             try {
                 photoFile = createImageFile();
