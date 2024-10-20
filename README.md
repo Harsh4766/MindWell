@@ -1,5 +1,3 @@
-Got it! Here's an updated README for your app:
-
 # MindWell: Mental Health Test Application
 
 ## Overview
